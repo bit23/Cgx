@@ -4,11 +4,11 @@ Canvas graphics Javascript library
 
 ## Sample apps
 
-- [animator](/sampleApps/animator/index.html)  
-- [brushes](/sampleApps/brushes/index.html)  
-- [colorWheels](/sampleApps/colorWheels/index.html)  
-- [pieChart](/sampleApps/pieChart/index.html)  
-- [simpleAnimation](/sampleApps/simpleAnimation/index.html)  
+- [animator](Cgx/sampleApps/animator/index.html)  
+- [brushes](Cgx/sampleApps/brushes/index.html)  
+- [colorWheels](Cgx/sampleApps/colorWheels/index.html)  
+- [pieChart](Cgx/sampleApps/pieChart/index.html)  
+- [simpleAnimation](Cgx/sampleApps/simpleAnimation/index.html)  
 
 ## Classes
 
