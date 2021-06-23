@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "None",
+        "declaration": true,
+        "noImplicitAny": true,
+        "strict": false,
+        "removeComments": true,
+        "moduleResolution": "Node",
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "inlineSourceMap": false,
+        "inlineSources": true,
+		"outFile": "dist/cgx.js",
+		"forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

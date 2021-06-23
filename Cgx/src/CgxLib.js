@@ -1,4 +1,0 @@
-﻿
-var library = {
-    Cgx: {}
-};
