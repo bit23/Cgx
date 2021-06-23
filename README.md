@@ -1,6 +1,6 @@
 ﻿# Cgx 
 
-Canvas graphics library for Javascript
+Canvas graphics library for Javascript/Typescript
 
 ## Sample apps
 
