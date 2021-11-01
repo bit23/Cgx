@@ -32,6 +32,9 @@ namespace Cgx {
             super(canvas);
             this._context = canvas.getContext("2d");
             this.setDefaultValues();
+
+            // NOTE improves the line render quality
+            this._context.translate(-0.5, -0.5);
         }
 
         private setDefaultValues() {
@@ -484,8 +487,13 @@ namespace Cgx {
 
         // image, imageData
 
-        public drawImage(img: CanvasImageSource, dx: number, dy: number, dw?: number, dh?: number, sx?: number, sy?: number, sw?: number, sh?: number) {
-            this._context.drawImage(img, dx, dy, dw, dh, sx, sy, sw, sh);
+        public drawImage(img: CanvasImageSource, x: number, y: number, width?: number, height?: number, sx?: number, sy?: number, sw?: number, sh?: number) {
+			if (sx != null && sy != null && sw != null && sh != null) {
+            	this._context.drawImage(img, x, y, width, height, sx, sy, sw, sh);
+			}
+			else {
+				this._context.drawImage(img, x, y, width, height);
+			}
         }
 
         public createImageData(width: number, height: number) {

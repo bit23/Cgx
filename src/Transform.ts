@@ -1,7 +1,7 @@
 ﻿
 namespace Cgx {
 
-    export class Transform {
+    export class Transform implements ITransform {
 
         private _matrix: Matrix;
         private _isDirty = true;
@@ -15,6 +15,19 @@ namespace Cgx {
 
 
         protected _propertyChanged: (propertyName: string) => void = (p) => { };
+
+
+        public clone() {
+            const result = new Transform();
+            result._originX = this._originX;
+            result._originY = this._originY;
+            result._translationX = this._translationX;
+            result._translationY = this._translationY;
+            result._scaleX = this._scaleX;
+            result._scaleY = this._scaleY;
+            result._rotation = this._rotation;
+            return result;
+        }
 
 
         public get originX() {

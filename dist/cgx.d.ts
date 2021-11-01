@@ -46,6 +46,7 @@ declare namespace Cgx {
     type BrushType = "linear" | "radial" | "pattern";
     abstract class Brush {
         abstract readonly brushType: BrushType;
+        abstract clone(): Brush;
     }
     abstract class GradientBrush extends Brush {
         protected _colorStops: Array<{
@@ -64,6 +65,7 @@ declare namespace Cgx {
         y0: number;
         x1: number;
         y1: number;
+        clone(): LinearGradientBrush;
     }
     class RadialGradientBrush extends GradientBrush {
         readonly brushType: BrushType;
@@ -73,11 +75,13 @@ declare namespace Cgx {
         x1: number;
         y1: number;
         r1: number;
+        clone(): RadialGradientBrush;
     }
     class PatternBrush extends Brush {
         readonly brushType: BrushType;
         image: HTMLImageElement;
         repetition: string;
+        clone(): PatternBrush;
     }
 }
 declare namespace Cgx {
@@ -129,11 +133,12 @@ declare namespace Cgx {
         getImageData(sx: number, sy: number, sw: number, sh: number): ImageData;
         putImageData(imageData: ImageData, x: number, y: number): void;
         getDataURL(type?: string, quality?: any): string;
-        pushTransform(transform: Transform): void;
+        pushTransform(transform: ITransform): void;
         popTransform(): void;
         measureText(text: string): TextMetrics;
         clear(fillBrush?: BrushDefinition): void;
         clearRect(x: number, y: number, width: number, height: number, fillBrush?: BrushDefinition): void;
+        clipRect(x: number, y: number, width: number, height: number): void;
         drawArc(cx: number, cy: number, radius: number, startAngle: number, endAngle: number, isAntiClockwise: boolean, transform?: Transform): void;
         drawLine(x1: number, y1: number, x2: number, y2: number, transform?: Transform): void;
         drawRoundedRectangle(x: number, y: number, width: number, height: number, cornersRadius: CornersRadiusDefinition, transform?: Transform): void;
@@ -369,7 +374,7 @@ declare namespace Cgx {
         addHitRegion(options?: any): void;
         removeHitRegion(id: string): void;
         clearHitRegions(): void;
-        drawImage(img: CanvasImageSource, dx: number, dy: number, dw?: number, dh?: number, sx?: number, sy?: number, sw?: number, sh?: number): void;
+        drawImage(img: CanvasImageSource, x: number, y: number, width?: number, height?: number, sx?: number, sy?: number, sw?: number, sh?: number): void;
         createImageData(width: number, height: number): ImageData;
         cloneImageData(imageData: ImageData): ImageData;
         getImageData(sx: number, sy: number, sw: number, sh: number): ImageData;
@@ -392,6 +397,10 @@ declare namespace Cgx {
     interface Point {
         x: number;
         y: number;
+    }
+    interface Size {
+        width: number;
+        height: number;
     }
     type BrushDefinition = number | string | number[] | GradientBrush | PatternBrush;
     type CornersRadiusObject = {
@@ -773,7 +782,7 @@ declare namespace Cgx {
     }
 }
 declare namespace Cgx {
-    class Transform {
+    class Transform implements ITransform {
         private _matrix;
         private _isDirty;
         private _originX;
@@ -784,6 +793,7 @@ declare namespace Cgx {
         private _scaleY;
         private _rotation;
         protected _propertyChanged: (propertyName: string) => void;
+        clone(): Transform;
         get originX(): number;
         set originX(v: number);
         get originY(): number;
@@ -812,11 +822,14 @@ declare namespace Cgx {
     }
 }
 declare namespace Cgx {
+    interface ITransform {
+        getMatrix(): Matrix;
+    }
     class TransformManager {
         private _transforms;
         private _renderer;
         constructor(renderer: GraphicsRenderer);
-        push(transform: Transform): void;
+        push(transform: ITransform): void;
         pop(): number;
         get length(): number;
     }

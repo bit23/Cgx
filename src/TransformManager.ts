@@ -1,9 +1,13 @@
 ﻿
 namespace Cgx {
 
+    export interface ITransform {
+        getMatrix(): Matrix;
+    }
+
     export class TransformManager {
 
-        private _transforms: Transform[];
+        private _transforms: ITransform[];
         private _renderer: GraphicsRenderer;
 
         constructor(renderer: GraphicsRenderer) {
@@ -11,7 +15,7 @@ namespace Cgx {
             this._renderer = renderer;
         }
 
-        public push(transform: Transform) {
+        public push(transform: ITransform) {
             var mtx = transform.getMatrix();
             this._transforms.push(transform);
             this._renderer.saveState();

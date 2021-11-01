@@ -232,7 +232,7 @@ namespace Cgx {
             return this._renderer.toDataURL(type, quality);
         }
 
-        public pushTransform(transform: Transform) {
+        public pushTransform(transform: ITransform) {
             this._transformManager.push(transform);
         }
 
@@ -258,6 +258,11 @@ namespace Cgx {
             this._renderer.clearRect(x, y, width, height, fillStyle);
         }
 
+		public clipRect(x: number, y: number, width: number, height: number) {
+			this._renderer.beginPath();
+			this._renderer.rect(x, y, width, height);
+			this._renderer.clip();
+		}
 
         public drawArc(cx: number, cy: number, radius: number, startAngle: number, endAngle: number, isAntiClockwise: boolean, transform?: Transform) {
 

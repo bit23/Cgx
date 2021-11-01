@@ -12,7 +12,8 @@
         "inlineSourceMap": false,
         "inlineSources": true,
 		"outFile": "dist/cgx.js",
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+        "types": ["node", "offscreencanvas"]
     },
     "include": [
         "src/**/*"
